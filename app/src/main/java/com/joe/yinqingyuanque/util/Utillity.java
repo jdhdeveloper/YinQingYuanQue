@@ -3,9 +3,11 @@ package com.joe.yinqingyuanque.util;
 import android.print.PrintAttributes;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.joe.yinqingyuanque.db.City;
 import com.joe.yinqingyuanque.db.County;
 import com.joe.yinqingyuanque.db.Province;
+import com.joe.yinqingyuanque.gson.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,5 +84,21 @@ public class Utillity {
         }
         return false;
     }
+    /**
+     * 将返回的JSON数据解析成weather实体类
+     */
+    public static Weather handleWeatherResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 }
