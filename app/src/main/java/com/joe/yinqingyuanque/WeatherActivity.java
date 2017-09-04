@@ -53,6 +53,7 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //根据版本是否大于21来设置沉浸式状态栏
         if (Build.VERSION.SDK_INT >= 21){
             View decorView = getWindow().getDecorView();
             decorView.setSystemUiVisibility(
@@ -61,6 +62,7 @@ public class WeatherActivity extends AppCompatActivity {
             );
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
         setContentView(R.layout.activity_weather);
         //初始化各控件
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
